@@ -1,0 +1,10 @@
+set fit quiet
+f(x) = a * x**3
+fit f(x) 'output/timingoutput.txt' via a
+set terminal png size 1200,900
+set output 'plotting/timingplot.png'
+set xlabel 'Dimensionality'
+set ylabel 'Time (s)'
+set title 'Time taken by QR decomposition'
+plot 'output/timingoutput.txt' pointtype 7 linecolor rgb 'black', f(x) linecolor rgb 'red'
+print 'a = ', a
