@@ -1,0 +1,28 @@
+
+
+*******************************************************************************
+Wed Jun 19 01:54:00 2024
+
+
+FIT:    data read from 'output/timing.txt'
+        format = z
+        #datapoints = 150
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x**3
+fitted parameters initialized with current variable values
+
+   4 6.3712296953e-01  -3.40e-06  1.29e+02    3.451026e-07
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.637123
+rel. change during last iteration : -3.39642e-11
+
+degrees of freedom    (FIT_NDF)                        : 149
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0653911
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.00427599
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 3.45103e-07      +/- 4.137e-09    (1.199%)

@@ -1,4 +1,5 @@
 #include <iostream> // For printing
+#include <fstream>      // For writing to files
 #include <ctime> // For generating a starting seed for RNG
 #include <vector> // For basic vectors
 #include <cmath>
@@ -27,16 +28,16 @@ void Jtimes(matrix &M, int p, int q, double theta){
         double apj = M.elements[p][j];
         double aqj = M.elements[q][j];
 
-        M.elements[p][j] = cosine * apj - sine * aqj;
-        M.elements[q][j] = sine * apj + cosine * aqj;
+        M.elements[p][j] = cosine * apj + sine * aqj;
+        M.elements[q][j] = -sine * apj + cosine * aqj;
     }
 }
 
 // Function that cycles through a matrix until it has converged below some threshold
-matrix cycle(matrix &M){
+matrix cycle(matrix &M, std::ostream& output = std::cout){
     matrix V = identitymatrix(M.x, M.y);
     if (M.x != M.y){
-        std::cout << "Mega Oof, the dimensions don't match! >:[" << std::endl;
+        output << "Mega Oof, the dimensions don't match! >:[" << std::endl;
     }
     bool changed = false; // Boolean that controls the loop
     int loopcounter = 0;
@@ -44,7 +45,7 @@ matrix cycle(matrix &M){
     do{ // Loop to do the EVD
         changed = false;
 
-        //std::cout << "Loop number " << loopcounter << std::endl; 
+        //output << "Loop number " << loopcounter << std::endl; 
         loopcounter++;
         for (int p=0; p<M.x-1; p++){
             for (int q=p+1; q<M.x; q++){
@@ -60,17 +61,17 @@ matrix cycle(matrix &M){
                 double napp = cosine * cosine * app - 2 * sine * cosine * apq + sine * sine * aqq;
                 double naqq = sine * sine * app + 2 * sine * cosine * apq + cosine * cosine * aqq;
 
-                //std::cout << p << "," << q << " with " << abs(napp - app) << " and " << abs(naqq - aqq) << "; theta= " << theta << std::endl;
+                //output << p << "," << q << " with " << abs(napp - app) << " and " << abs(naqq - aqq) << "; theta= " << theta << std::endl;
                 if (napp =! app || naqq != aqq){
                     changed = true;
                     timesJ(M, p, q, theta);
-                    Jtimes(M, p, q, theta);
+                    Jtimes(M, p, q, -theta);
                     timesJ(V,p,q, theta);
-                    //std::cout << "The Matrix is now:" << std::endl; M.print();
+                    //output << "The Matrix is now:" << std::endl; M.print();
                 }
             }
         }
-    }while(changed && loopcounter < 100);
+    }while(changed);//while(changed && loopcounter < 0); //
 
     return V;
 }

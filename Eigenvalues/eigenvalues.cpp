@@ -11,37 +11,45 @@
 #include "src/matrices.cpp"
 #include "src/eigen.cpp"
 
-int main(){
+int main(int argc, char *argv[]){
+    // Making a file to output to
+    std::ofstream outputting;
+    outputting.open("output/eigen.txt");
+    
 
-    matrix M{.x=4, .y=4};
-    M = identitymatrix(4,4);
-    M.elements[0][2] = 4.8;
+    //////////////////////////////
+    // This part is for diagonalization of a random square matrix
+
+    matrix M{.x=8, .y=8};
+    //M = identitymatrix(4,4);
+    //M.elements[0][2] = 4.8;
     M.randfill(100);
     M.forcesymmetry();
-    std::cout << "Original matrix:" << std::endl;
-    M.print();
+    outputting << "Original matrix:" << std::endl;
+    M.print(outputting);
     matrix original = M;
 
 
    
 
-    std::cout << "Diagonalizing" << std::endl;
+    outputting << "Diagonalizing" << std::endl;
     matrix eigenvectors = cycle(M);
-    std::cout << "Diagonalized matrix:" << std::endl;
-    M.print();
-    std::cout << "Eigenvectors:" << std::endl;
-    eigenvectors.print();
-    std::cout << "VDV^T:" << std::endl;
+    outputting << "Diagonalized matrix:" << std::endl;
+    M.print(outputting);
+    outputting << "Eigenvectors:" << std::endl;
+    eigenvectors.print(outputting);
+    outputting << "VDV^T:" << std::endl;
     matrix VDV = matmult(eigenvectors, matmult(M,transpose(eigenvectors)));
-    VDV.print();
-    std::cout << "VDV is = Matrix: " << samematrix(VDV,original) << std::endl;
-    std::cout << "AVA is = D: " << samematrix(matmult(transpose(eigenvectors), matmult(original,eigenvectors)),M) << std::endl;
-    std::cout << "V^TV is = I: " << samematrix(matmult(transpose(eigenvectors),eigenvectors),identitymatrix(M.x, M.x)) << std::endl;
-    std::cout << "VV^T is = I: " << samematrix(matmult(eigenvectors,transpose(eigenvectors)),identitymatrix(M.x, M.x)) << std::endl;
+    VDV.print(outputting);
+    outputting << "VDV is = Matrix: " << samematrix(VDV,original) << std::endl;
+    outputting << "AVA is = D: " << samematrix(matmult(transpose(eigenvectors), matmult(original,eigenvectors)),M) << std::endl;
+    outputting << "V^TV is = I: " << samematrix(matmult(transpose(eigenvectors),eigenvectors),identitymatrix(M.x, M.x)) << std::endl;
+    outputting << "VV^T is = I: " << samematrix(matmult(eigenvectors,transpose(eigenvectors)),identitymatrix(M.x, M.x)) << std::endl;
 
 
 
 
+    outputting.close(); // Closing the output file
 
     return 0;
 }

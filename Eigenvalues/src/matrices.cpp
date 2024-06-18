@@ -1,4 +1,5 @@
 #include <iostream> // For printing
+#include <fstream>      // For writing to files
 #include <ctime> // For generating a starting seed for RNG
 #include <vector> // For basic vectors
 #include <cmath>
@@ -35,15 +36,15 @@ class matrix {
             }
         }
         // Print out the matrix
-        void print(){
+        void print(std::ostream& output = std::cout){
             for (int i=0; i<x;i++){
-                std::cout << "|";
+                output << "|";
                 for (int j=0; j<y;j++){
-                    std::cout << elements[i][j] << ", ";
+                    output << elements[i][j] << ", ";
                 }
-                std::cout<<"\b \b"; // This removes the extra space
-                std::cout<<"\b \b"; // This removes the extra comma
-                std::cout << "|" << std::endl;
+                output<<"\b \b"; // This removes the extra space
+                output<<"\b \b"; // This removes the extra comma
+                output << "|" << std::endl;
             }
         }
 
@@ -92,7 +93,7 @@ std::vector<double> scale(std::vector<double> vec, double scalar){
     return vec;
 }
 
-std::vector<double> add(std::vector<double> vec1, std::vector<double> vec2){
+std::vector<double> add(std::vector<double> vec1, std::vector<double> vec2, std::ostream& output = std::cout){
     std::vector<double> result;
     if (vec1.size() == vec2.size()) {
         result.resize(vec1.size()); 
@@ -102,7 +103,7 @@ std::vector<double> add(std::vector<double> vec1, std::vector<double> vec2){
         return result;
     }
     else{
-        std::cout << "Mega Oof, the dimensions don't match! >:[" << std::endl;
+        output << "Mega Oof, the dimensions don't match! >:[" << std::endl;
         return result;
     }
 }
@@ -117,7 +118,7 @@ double norm(std::vector<double> vec){
 }
 
 // Dot product between two vectors
-double dot(std::vector<double> vec1, std::vector<double> vec2){
+double dot(std::vector<double> vec1, std::vector<double> vec2, std::ostream& output = std::cout){
     double sum = 0;
     if (vec1.size() == vec2.size()) {
         for (int i=0; i<vec1.size(); i++){
@@ -126,20 +127,20 @@ double dot(std::vector<double> vec1, std::vector<double> vec2){
         return sum;
     }
     else{
-        std::cout << "Mega Oof, the dimensions don't match! >:[" << std::endl;
+        output << "Mega Oof, the dimensions don't match! >:[" << std::endl;
         return -1;
     }
 }
 
 // Convenient function for printing vectors
-void vectorprint(std::vector<double> vec){
-    std::cout << "|";
+void vectorprint(std::vector<double> vec, std::ostream& output = std::cout){
+    output << "|";
     for (int i=0; i<vec.size(); i++){
-        std::cout << vec[i] << ", ";
+        output << vec[i] << ", ";
     }
-    std::cout<<"\b \b"; // This removes the extra space
-    std::cout<<"\b \b"; // This removes the extra comma
-    std::cout << "|" << std::endl;
+    output<<"\b \b"; // This removes the extra space
+    output<<"\b \b"; // This removes the extra comma
+    output << "|" << std::endl;
 }
 
 // Check if two vectors are roughly equal
@@ -172,7 +173,7 @@ matrix transpose(matrix M){
 }
 
 // Multiplying a matrix with a vector
-std::vector<double> matvecmult(matrix M, std::vector<double> vec){
+std::vector<double> matvecmult(matrix M, std::vector<double> vec, std::ostream& output = std::cout){
     std::vector<double> result;
     result.resize(M.x);
     if (M.y == vec.size()){
@@ -183,13 +184,13 @@ std::vector<double> matvecmult(matrix M, std::vector<double> vec){
         }
     }
     else{
-        std::cout << "Mega Oof, the dimensions don't match! >:[" << std::endl;
+        output << "Mega Oof, the dimensions don't match! >:[" << std::endl;
     }
     return result; // Will be empty if dimensions are bad
 }
 
 // Multiplying matrices
-matrix matmult(matrix M1, matrix M2){
+matrix matmult(matrix M1, matrix M2, std::ostream& output = std::cout){
     matrix result(M1.x, M2.y);
     if (M1.y == M2.x){ // This checks dimensions real quick
         result.fill(0.0);
@@ -203,7 +204,7 @@ matrix matmult(matrix M1, matrix M2){
         }
     }
     else {
-        std::cout << "Mega Oof, the dimensions don't match! >:[" << std::endl;
+        output << "Mega Oof, the dimensions don't match! >:[" << std::endl;
     }
     
     return result;  
@@ -259,9 +260,9 @@ class QR{
 
 
         // Making a function to solve linear systems of equations
-        std::vector<double> solve(std::vector<double> vec){
+        std::vector<double> solve(std::vector<double> vec, std::ostream& output = std::cout){
             if (Q.x != Q.y){
-                std::cout << "Careful, the matrix is not square!" << std::endl;
+                output << "Careful, the matrix is not square!" << std::endl;
             }
             std::vector<double> c = matvecmult(transpose(Q), vec);
             std::vector<double> y;
@@ -287,11 +288,11 @@ class QR{
         }
 
         // Function for finding the inverse of the original matrix
-        matrix inverse(){
+        matrix inverse(std::ostream& output = std::cout){
             matrix result{.x=Q.y, .y=Q.x};
 
             if (Q.x != Q.y){
-                std::cout << "Careful, the matrix is not square!" << std::endl;
+                output << "Careful, the matrix is not square!" << std::endl;
             }
             for (int i=0; i<Q.x; i++){
                 // Making the ei vectors which are zero except at the i'th index
