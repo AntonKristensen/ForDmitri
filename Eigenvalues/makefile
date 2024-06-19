@@ -26,7 +26,7 @@ do :
 	make clean
 	make eigen
 	make hamil
-	make timing
+	make -j2 timing
 	make plot
 
 

@@ -1,0 +1,12 @@
+set fit quiet
+set terminal png size 1200,900
+
+set output 'plotting/datafit.png'
+set xlabel 'Time (days)'
+set ylabel 'Activity ()'
+set title 'Ra224 decay'
+load "output/fitresult.txt"
+f(x) = a * exp(- lambda * x)
+plot 'output/datas.txt' u 1:2:3 pointtype 7 lc rgb 'black' w errorbars, f(x) lc rgb 'red'
+
+
