@@ -13,8 +13,8 @@
 # Naming stuff as variable
 code = least.cpp
 srcdir = src
-source = $(srcdir)/matrices.cpp 
 outdir = output
+source = $(srcdir)/matrices.cpp $(srcdir)/eigen.cpp
 plotdir = plotting
 out = $(outdir)/least.txt
 

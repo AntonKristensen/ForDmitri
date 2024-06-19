@@ -1,2 +1,6 @@
 a = 142.404
-lambda = 0.171379
+lambda = 0.170624
+sigma_ln(a) = 0.0354019
+sigma_a = 5.04136
+sigma_(minuslambda) = 0.00715662
+sigma_lambda = 0.00715662

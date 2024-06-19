@@ -1,12 +1,34 @@
 set fit quiet
 set terminal png size 1200,900
 
+set style line 1 lt 1 lw 2 lc rgb "red"
+set style line 2 lt 1 dt 4 lw 1 lc rgb "green"
+set style line 3 lt 1 dt 4 lw 1 lc rgb "blue"
+set grid
+set border 3
+set key top right box
+
 set output 'plotting/datafit.png'
 set xlabel 'Time (days)'
-set ylabel 'Activity ()'
+set ylabel 'Activity'
 set title 'Ra224 decay'
 load "output/fitresult.txt"
 f(x) = a * exp(- lambda * x)
-plot 'output/datas.txt' u 1:2:3 pointtype 7 lc rgb 'black' w errorbars, f(x) lc rgb 'red'
+f1(x) = a * exp(- (lambda + sigma_lambda)* x)
+f2(x) = a * exp(- (lambda - sigma_lambda)* x)
+f3(x) = (a + sigma_a) * exp(- lambda* x)
+f4(x) = (a - sigma_a) * exp(- lambda* x)
+plot 'output/datas.txt' u 1:2:3 pointtype 7 lc rgb 'black' w errorbars t "data", f(x) t "fit(a,λ)" ls 1, f1(x) with lines t "fit(a+σ,λ)" ls 2, f2(x) t "fit(a-σ,λ)" ls 2, f3(x) t "fit(a,λ+σ)" ls 3, f4(x) t "fit(a,λ-σ)" ls 3
 
+set output 'plotting/lndatafit.png'
+set xlabel 'Time (days)'
+set ylabel 'ln(activity)'
+set title 'Logarithmic Ra224 decay'
+load "output/fitresult.txt"
+g(x) = log(a) - lambda * x
+g1(x) = log(a) - (lambda + sigma_lambda) * x
+g2(x) = log(a) - (lambda - sigma_lambda) * x
+g3(x) = log(a + sigma_a) - lambda * x
+g4(x) = log(a - sigma_a) - lambda * x
+plot 'output/datas.txt' u 1:4:5 pointtype 7 lc rgb 'black' w errorbars t "data", g(x) t "ln fit(a,λ)" ls 1, g1(x) t "fit(a+σ,λ)" ls 2, g2(x) t "fit(a-σ,λ)" ls 2, g3(x) t "fit(a,λ+σ)" ls 3, g4(x) t "fit(a,λ-σ)" ls 3
 

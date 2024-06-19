@@ -184,7 +184,7 @@ std::vector<double> matvecmult(matrix M, std::vector<double> vec, std::ostream& 
         }
     }
     else{
-        output << "Mega Oof, the dimensions don't match! >:[" << std::endl;
+        output << "Mega Oof, the dimensions for matrix-vector don't match! >:[" << std::endl;
     }
     return result; // Will be empty if dimensions are bad
 }
@@ -204,7 +204,7 @@ matrix matmult(matrix M1, matrix M2, std::ostream& output = std::cout){
         }
     }
     else {
-        output << "Mega Oof, the dimensions don't match! >:[" << std::endl;
+        output << "Mega Oof, the dimensions for the matrix multiplication don't match! >:[" << std::endl;
     }
     
     return result;  
