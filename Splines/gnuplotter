@@ -1,0 +1,31 @@
+set fit quiet
+set terminal png size 1200,900
+
+set style line 4 pointtype 7 lc rgb 'black'
+set style line 1 lt 1 lw 2 lc rgb "red"
+set style line 2 lt 1 dt 4 lw 1 lc rgb "green"
+set style line 3 lt 1 dt 4 lw 1 lc rgb "blue"
+
+set grid
+set border 3
+set key top right box
+#load "output/fitresult.txt" # This is how you load variables from a file that is like "a = 3\nb = 4" etc, I.E. variables in a single column.
+
+set output 'plotting/linterpol.png'
+set xlabel 'X'
+set ylabel 'Y'
+set title 'Linear interpolations'
+plot 'output/data.txt' u 1:2 ls 4 t "data", 'output/lin.txt' u 1:2 w l lc rgb 'grey' t "Linear", 'output/linint.txt' u 1:2 w l lc rgb 'red' t "Lin int"
+
+
+set output 'plotting/qinterpol.png'
+set xlabel 'X'
+set ylabel 'Y'
+set title 'Quadratic interpolations'
+plot 'output/data.txt' u 1:2 ls 4 t "data", 'output/qin.txt' u 1:2 w l lc rgb 'grey' t "Quadratic", 'output/qinint.txt' u 1:2 w l lc rgb 'red' t "Lin int", 'output/dinint.txt' u 1:2 w l lc rgb 'blue' t "Lin int"
+
+set output 'plotting/OnlyTheQuadraticInterpolation.png'
+set xlabel 'X'
+set ylabel 'Y'
+set title 'Quadratic interpolations'
+plot 'output/data.txt' u 1:2 ls 4 t "data", 'output/qin.txt' u 1:2 w l lc rgb 'grey' t "Quadratic"
