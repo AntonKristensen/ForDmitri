@@ -160,6 +160,18 @@ bool samevector(std::vector<double> v1, std::vector<double> v2, double threshold
 }
 
 
+// Neat little function for making a linspace
+std::vector<double> linspace(double start, double stop, double interval){
+    int len = (int) ((stop - start) / interval);
+    std::vector<double> xs;
+    xs.resize(len+1);
+    for (int i=0; i<len+1; i++){
+        xs[i] = start + (i) * interval;
+    }
+    return xs;
+}
+
+
 
 // A function for transposing matrices
 matrix transpose(matrix M){

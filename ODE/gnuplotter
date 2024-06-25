@@ -29,3 +29,34 @@ set xlabel 'X'
 set ylabel 'Y'
 set title 'Driven harmonic'
 plot 'output/driven.txt' u 1:2 ls 4 t "ODE solution"
+
+set output 'plotting/interpolation.png'
+set xlabel 'X'
+set ylabel 'Y'
+set title 'Interpolated driven harmonic'
+plot 'output/interpolated.txt' u 1:2 ls 4 t "Interpolated ODE solution" 
+
+
+
+set output 'plotting/circular.png'
+set xlabel 'X'
+set ylabel 'Y'
+set title 'Circular orbital motion'
+set size ratio -1
+plot 'output/circular.txt' u (1/$2)*cos($1):(1/$2)*sin($1) ls 4 t "Interpolated ODE solution" 
+
+
+set output 'plotting/ellipse.png'
+set xlabel 'X'
+set ylabel 'Y'
+set title 'Elliptic orbital motion'
+set size ratio -1
+plot 'output/ellipse.txt' u (1/$2)*cos($1):(1/$2)*sin($1) ls 4 t "Interpolated ODE solution" 
+
+set output 'plotting/relativistic.png'
+set xlabel 'X'
+set ylabel 'Y'
+set title 'Relativistic orbital motion'
+set size ratio -1
+plot 'output/relativistic.txt' u (1/$2)*cos($1):(1/$2)*sin($1) ls 4 t "Interpolated ODE solution" with linespoints
+
