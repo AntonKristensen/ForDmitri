@@ -17,7 +17,7 @@ All the folders are made so that you can just type "make do" in your shell and i
 ---------------------------------------
 | 5  | ODE           | 6 | 3 | - |  9  |
 ---------------------------------------
-| 6  | Integration   | - | - | - |  -  |
+| 6  | Integration   | 6 | 3 | 1 | 10  |
 ---------------------------------------
 | 7  | roots         | - | - | - |  -  |
 ---------------------------------------
@@ -29,5 +29,5 @@ All the folders are made so that you can just type "make do" in your shell and i
 ---------------------------------------
 |              ...                     |
  ======================================
-|                    total points: 95  |
+|                    total points: 58  |
  ======================================

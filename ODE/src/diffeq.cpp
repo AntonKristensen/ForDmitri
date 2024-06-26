@@ -11,7 +11,8 @@
 
 
 
-
+// This only takes a function which takes a double as the first input and a vector (which has y[0] and y[1]) as the second input. This can only solve very few diffeqs, so if I wanted it to do more,
+// I would rewrite it so that any function just has a list or a struct as input, which then has variable size depending on the specific function, which the stepper and driver function would take into account
 std::vector<std::vector<double>> stepper(std::function<std::vector<double>(double, std::vector<double>)> f, double x, std::vector<double> y, double h){
     std::vector<double> k0 = f(x,y);
     std::vector<double> k1 = f(x + 0.5*h, add(y, scale(k0, 0.5 * h))); // 0.5h is midpoint method

@@ -1,0 +1,14 @@
+Testing my integration on the first four functions:
+Should be 2/3: 0.666954 #calls: 7
+Should be 2: 1.99996 #calls: 4285
+Should be pi: 3.14183 #calls: 13
+Should be -4: -3.99992 #calls: 4301
+Testing the Clenshaw-Curtis transformation:
+Should be 2: 1.99999 #calls: 7 compared to the non transformed's: 4285
+Should be -4: -3.99987 #calls: 47 compared to the non transformed's: 4301
+Now with error estimate!
+Should be 2: 1.99996, error: 0.00130573, #calls: 4285
+Testing infinite limits:
+Should be 1: 1, error: 1.11022e-16, #calls: 1
+Should be e: 2.72029, error: 0.00338017, #calls: 17
+Should be sqrt(pi) ≈ 1.77245: 1.77269, error: 0.00194967, #calls: 35
