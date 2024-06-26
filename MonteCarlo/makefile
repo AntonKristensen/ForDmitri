@@ -11,17 +11,17 @@
 #Then in your makefile you can refer to $(foo)
 
 # Naming stuff as variable
-code = integrals.cpp
+code = montecarlo.cpp
 srcdir = src
 outdir = output
 source = $(srcdir)/matrices.cpp
 plotdir = plotting
-out = $(outdir)/integrals.txt
+out = $(outdir)/montecarlo.txt
 
 
 do : 
 	make clean
-	make integrals
+	make montecarlo
 	make plot
 
 
@@ -29,15 +29,15 @@ do :
 fresh : 
 	mkdir -p $(outdir) $(plotdir) $(srcdir)
 
-integrals : integrals.cpp $(source)
-	g++ -o integrals.exe $<
-#	./integrals.exe
-	./integrals.exe > $(outdir)/out.txt
+montecarlo : montecarlo.cpp $(source)
+	g++ -o montecarlo.exe $<
+	./montecarlo.exe > $(outdir)/out.txt
+#	./montecarlo.exe
 
 
 plot :
 	gnuplot gnuplotter
 
 clean :
-	rm --force integrals.exe $(outdir)/* $(plotdir)/*
+	rm --force montecarlo.exe $(outdir)/* $(plotdir)/*
 
