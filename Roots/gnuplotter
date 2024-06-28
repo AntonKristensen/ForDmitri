@@ -1,0 +1,49 @@
+set fit quiet
+set terminal png size 1200,900
+
+set style line 4 pointtype 7 lc rgb 'black'
+set style line 5 pointtype 7 lc rgb "grey"
+set style line 1 lt 1 lw 2 lc rgb "red"
+set style line 2 lt 1 dt 4 lw 1 lc rgb "green"
+set style line 3 lt 1 dt 4 lw 1 lc rgb "blue"
+
+set grid
+set border 3
+set key top right box
+#load "output/fitresult.txt" # This is how you load variables from a file that is like "a = 3\nb = 4" etc, I.E. variables in a single column.
+
+set output 'plotting/schrodinger.png'
+set xlabel 'r'
+set ylabel 'f'
+set title 'Schrodinger solution'
+f0(x) = x * exp(-x)
+plot 'output/schrodinger.txt' u 1:2 ls 4 t "Numerical solution", f0(x) ls 5 t "Exact solution"
+
+
+set output 'plotting/rmin.png'
+set xlabel 'rmin'
+set ylabel 'E'
+set title 'rmin convergence test'
+plot 'output/rmin.txt' u 1:2 ls 4 t "E(rmin)"
+
+
+set output 'plotting/rmax.png'
+set xlabel 'rmax'
+set ylabel 'E'
+set title 'rmax convergence test'
+plot 'output/rmax.txt' u 1:2 ls 4 t "E(rmax)"
+
+
+set output 'plotting/acc.png'
+set xlabel 'acc'
+set ylabel 'E'
+set title 'acc convergence test'
+plot 'output/acc.txt' u 1:2 ls 4 t "E(acc)"
+
+
+set output 'plotting/eps.png'
+set xlabel 'eps'
+set ylabel 'E'
+set title 'eps convergence test'
+plot 'output/eps.txt' u 1:2 ls 4 t "E(eps)"
+
