@@ -1,0 +1,37 @@
+Testing:
+Value of Rosenbrock(0,0) = 
+1
+Gradient of Rosenbrock(0,0) = 
+|-2, 1.49012e-06,   |
+Hessian of Rosenbrock(0,0) = 
+|2, 0,   |
+|-0.0244141, 200,   |
+Minimum of Rosenbrock(0,0): 
+Steps taken: 13
+|0.999986, 0.999971,   |
+Rosenbrock(minimum) = 2.03474e-10
+Value of Himmelblau(0,0) = 
+170
+Gradient of Himmelblau(0,0) = 
+|-14, -22,   |
+Hessian of Himmelblau(0,0) = 
+|-42, 0,   |
+|0, -26,   |
+Minimum of Himmelblau(0,0): 
+Oh no it didn't converge! :|
+Steps taken: 1001
+|-2.48854e-06, -6.31698e-06,   |
+Himmelblau(minimum) = 170
+This isn't a correct minimum of the Himmelblau function.
+My algorithm does, however, find a correct minimum if the starting point is better:
+Minimum of Himmelblau(2,3): 
+Steps taken: 5
+|3, 2,   |
+Himmelblau(minimum) = 3.42975e-14
+Oh no it didn't converge! :|
+Steps taken: 1001
+D = 38015.9
+With parameters m,Γ,A = |127.222, 7.04442, 21.565,   |
+Guess by inspection: D = 31781.7
+With parameters m,Γ,A = |126, 3, 14,   |
+So maybe my minimization algorithm isn't the best at finding such difficult minima :(
