@@ -57,7 +57,7 @@ int main(int argc, char *argv[]){
     randvec(u,1); // Filling the vector with random values between -1000 and 1000
 
     // The value of σ. It is randomly generated, uniformly distributed from -1 to 1
-    double sigma = -1;//((double)rand()/ (double)RAND_MAX - 0.5) * 2;
+    double sigma = ((double)rand()/ (double)RAND_MAX - 0.5) * 2;
 
     // Making the secular equation as a lambda expression. It captures the d and u vectors and σ from above.
     auto secular = [d, u, sigma](std::vector<double> params){ // For beauty's sake it should take a double as input, but my root finding algorithm needs it to take a vector, so it's just a 1 element list. I could make an overloaded version of the root finding algorithm if I had infinite free time, but I'm going to CERN tomorrow so I don't feel like it right now.
@@ -93,19 +93,23 @@ int main(int argc, char *argv[]){
                     //std::cout << "Fake root at i= " << i  <<  ". root - guess = " << roots[i] - guess << ". Guessed: " << guess << std::endl;
                     //std::cout << secular({d[i] + (d[i+1] - d[i])/100000})[0] << ", " << secular({d[i] + 999*(d[i+1] - d[i])/1000})[0] << std::endl;
                     roots[i] = newton(secular, {d[i] + 999*(d[i+1] - d[i])/1000}, 0.001)[0];
-                    //std::cout << "Found actual root! at: " << roots[i] << ", with value: " << secular({roots[i]})[0] << std::endl;
+                    std::cout << "Found actual root! at: " << roots[i] << ", with value: " << secular({roots[i]})[0] << std::endl;
                 }
             }
         }else if (sigma <= 0){
             if (i == 0){
                 guess = (2 * d[i] + sigma * dot(u, u))/2;
+                roots[i] = newton(secular, {guess})[0];
             }else {
                 guess = (d[i] + d[i-1])/2;
+                roots[i] = newton(secular, {guess})[0];
+                if (roots[i] < d[i-1] || roots[i] > d[i]){ // Same here. If the root is hard to find then it's because it's close to d[i]
+                    roots[i] = newton(secular, {d[i-1] + (d[i] - d[i-1])/1000}, 0.001)[0];
+                    std::cout << "Found actual root! at: " << roots[i] << ", with value: " << secular({roots[i]})[0] << std::endl;
+                }
             }
-            roots[i] = newton(secular, {guess})[0];
-            if (roots[i] < d[i-1] || roots[i] > d[i]){ // Same here. If the root is hard to find then it's because it's close to d[i]
-                roots[i] = newton(secular, {d[i-1] + (d[i] - d[i-1])/1000}, 0.001)[0];
-            }
+                
+            
         }
         
     }
