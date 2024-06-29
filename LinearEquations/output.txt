@@ -1,0 +1,12 @@
+Hello Dmitri!
+Decomposing tall matrix:
+Decomposed!
+R is upper triangular: 1
+Q^T Q is I: 1
+QR is = Matrix: 1
+Solving square matrix equation:
+Solved!
+Rx is Q^Tb: 1
+Ax is b: 1
+Inverting:
+A^-1 A = I: 1

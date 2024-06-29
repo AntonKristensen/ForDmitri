@@ -1,0 +1,58 @@
+
+
+*******************************************************************************
+Sat Jun 29 07:04:57 2024
+
+
+FIT:    data read from 'output/timing.txt' u 1:2
+        format = x:z
+        #datapoints = 68
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x^2
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Sat Jun 29 07:05:34 2024
+
+
+FIT:    data read from 'output/timing.txt'
+        format = z
+        #datapoints = 68
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x^2
+fitted parameters initialized with current variable values
+
+
+
+*******************************************************************************
+Sat Jun 29 07:07:50 2024
+
+
+FIT:    data read from 'output/timing.txt'
+        format = z
+        #datapoints = 68
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+	f(x) = a * x * x
+fitted parameters initialized with current variable values
+
+   4 1.2211042747e-02  -1.94e-02  1.88e+02    1.776451e-07
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 0.012211
+rel. change during last iteration : -1.93645e-07
+
+degrees of freedom    (FIT_NDF)                        : 67
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.0135002
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.000182254
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+a               = 1.77645e-07      +/- 8.7e-10      (0.4898%)

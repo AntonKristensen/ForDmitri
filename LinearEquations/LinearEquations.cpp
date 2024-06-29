@@ -23,6 +23,7 @@ int main() {
     tall.randfill(100);
     //std::cout << "Matrix is:" << std::endl;
     //tall.print();
+    
 
     // I decompose
     std::cout << "Decomposing tall matrix:" << std::endl;
@@ -71,6 +72,7 @@ int main() {
     matrix square(squaredimension,squaredimension);
     square.randfill(100);
     QR squaredecomp = decomp(square); // QR decomposition of the matrix
+    
 
 
 

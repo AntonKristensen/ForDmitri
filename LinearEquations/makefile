@@ -15,6 +15,11 @@ outdir = output
 plotdir = plotting
 out = $(outdir)/timingoutput.txt
 
+do : $(code) $(source)
+	g++ -o $(exe) $<
+#	./$(exe) > $(outdir)/output.txt
+	./$(exe)
+	make plot
 
 output.txt : $(exe) $(source)
 	./$< > $@
@@ -25,10 +30,7 @@ result.exe : $(code) $(source)
 fresh : 
 	mkdir $(outdir) $(plotdir) $(srcdir)
 
-do : $(code) $(source)
-	g++ -o $(exe) $<
-	./$(exe)
-	make plot
+
 
 plotscript : 
 

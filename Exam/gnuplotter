@@ -1,0 +1,26 @@
+set fit quiet
+set terminal png size 1200,900
+
+set style line 4 pointtype 7 lc rgb 'black'
+set style line 5 pointtype 7 lc rgb "grey"
+set style line 6 pointtype 7 lc rgb "red"
+set style line 1 lt 1 lw 2 lc rgb "red"
+set style line 2 lt 1 dt 4 lw 1 lc rgb "green"
+set style line 3 lt 1 dt 4 lw 1 lc rgb "blue"
+
+set grid
+set border 3
+set key top right box
+#load "output/fitresult.txt" # This is how you load variables from a file that is like "a = 3\nb = 4" etc, I.E. variables in a single column.
+#fit f(x) 'data.txt' via a, b # That's how you fit a function defined like "f(x) = a + b * x"
+
+set output 'plotting/time.png'
+set xlabel 'N'
+set ylabel 'Time (s)'
+set title 'Time to find eigenvalues of rank-1 update'
+f(x) = a * x * x
+fit f(x) 'output/timing.txt' via a
+plot 'output/timing.txt' u 1:2 ls 4 t "Eigenvalue time", f(x) ls 5 t 'x^2 fit'
+
+
+ 
