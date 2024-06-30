@@ -1,0 +1,28 @@
+set fit quiet
+set terminal png size 1200,900
+
+set style line 4 pointtype 7 lc rgb 'black'
+set style line 5 pointtype 7 lc rgb "grey"
+set style line 6 pointtype 7 lc rgb "red"
+set style line 1 lt 1 lw 2 lc rgb "red"
+set style line 2 lt 1 dt 4 lw 1 lc rgb "green"
+set style line 3 lt 1 dt 4 lw 1 lc rgb "blue"
+
+set grid
+set border 3
+set key top right box
+#load "output/fitresult.txt" # This is how you load variables from a file that is like "a = 3\nb = 4" etc, I.E. variables in a single column.
+
+set output 'plotting/higgs.png'
+set xlabel 'r'
+set ylabel 'f'
+set title 'Higgs data'
+ownm = 126
+owngamma = 3
+owna = 14
+load "output/fitresult.txt"
+bw(x) = a / ((x-m) * (x-m) + gamma * gamma /4 )
+ownbw(x) = owna / ((x-ownm) * (x-ownm) + owngamma * owngamma /4 )
+plot 'src/data.csv' u 1:2:3 ls 4 t "Higgs data" with errorbars, bw(x) ls 6 t 'Fit by minimization', ownbw(x) ls 5 t 'Own guess by eyes'
+
+
